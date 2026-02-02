@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yes or No?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url('https://i.pinimg.com/736x/de/e0/43/dee043b1c5163ca6305ce4328ed30e0d.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #000;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+        
+        .p {
+            color: #000;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        button-content {
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            width: 150px;
+            height: 50px;
+            border-radius: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        #yesBtn {
+            background-color: #4CAF50
+        }
+
+        #noBtn {
+            background-color: #f44336
+        }
+
+        .question {
+            font-size: 24px;
+            color: #000;
+            margin-bottom: 50px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class = "question-border">
+            <h1>Important Question</h1>
+            <p class="question">Do you want to, like, heheheh, be my valentines or something (bites lip) (also sharts nauseously)?</p>
+            
+            <div class="button-container">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const container = document.querySelector('.button-container');
+
+        // Navigate to another page when Yes is clicked
+        yesBtn.addEventListener('click', function() {
+            window.location.href = 'yippie.html';
+        });
+
+        // Make the No button move to random positions
+        function moveButton() {
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Get the viewport dimensions
+            const maxX = window.innerWidth - btnRect.width - 20;
+            const maxY = window.innerHeight - btnRect.height - 20;
+            
+            // Generate random position
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            // Apply the new position (fixed positioning to move anywhere on screen)
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // Move button on hover
+        noBtn.addEventListener('mouseenter', moveButton);
+
+        // Also move on click attempt (for touch devices)
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            moveButton();
+        });
+
+        // Mobile touch support
+        noBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            moveButton();
+        });
+    </script>
+</body>
+</html>
